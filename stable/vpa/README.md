@@ -156,8 +156,8 @@ recommender:
 | recommender.image.pullPolicy | string | `"Always"` | The pull policy for the recommender image. Recommend not changing this |
 | recommender.podAnnotations | object | `{}` | Annotations to add to the recommender pod |
 | recommender.podLabels | object | `{}` | Labels to add to the recommender pod |
-| recommender.podSecurityContext | object | `{"runAsNonRoot":true,"runAsUser":65534}` | The security context for the recommender pod |
-| recommender.securityContext | object | `{}` | The security context for the containers inside the recommender pod |
+| recommender.podSecurityContext | object | `{"runAsNonRoot":true,"runAsUser":65534,"seccompProfile":{"type":"RuntimeDefault"}}` | The security context for the recommender pod |
+| recommender.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true}` | The security context for the containers inside the recommender pod |
 | recommender.livenessProbe | object | `{"failureThreshold":6,"httpGet":{"path":"/health-check","port":"metrics","scheme":"HTTP"},"periodSeconds":5,"successThreshold":1,"timeoutSeconds":3}` | The liveness probe definition inside the recommender pod |
 | recommender.readinessProbe | object | `{"failureThreshold":120,"httpGet":{"path":"/health-check","port":"metrics","scheme":"HTTP"},"periodSeconds":5,"successThreshold":1,"timeoutSeconds":3}` | The readiness probe definition inside the recommender pod |
 | recommender.resources | object | `{"limits":{"cpu":"200m","memory":"1000Mi"},"requests":{"cpu":"50m","memory":"500Mi"}}` | The resources block for the recommender pod |
